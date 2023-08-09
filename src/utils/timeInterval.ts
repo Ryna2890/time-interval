@@ -5,18 +5,18 @@ const currentFormatMinutes = (minutes: number) => {
     return (minutes < 10 ? "0" + minutes : minutes)
 }
 
-export const formatData = (interval: Interval) => {
-    const currentDayStart = new Date();
-    const hourStart = Number(interval.start.split(':')[0]);
-    const minuteStart = Number(interval.start.split(':')[1]);
-    currentDayStart.setHours(hourStart);
-    currentDayStart.setMinutes(minuteStart)
+const getCurrentDay = (time: string) => {
+    const currentDay = new Date();
+    const hourStart = Number(time.split(':')[0]);
+    const minuteStart = Number(time.split(':')[1]);
+    currentDay.setHours(hourStart);
+    currentDay.setMinutes(minuteStart)
+    return currentDay
+}
 
-    const currentDayStop = new Date();
-    const hourStop = Number(interval.stop.split(':')[0]);
-    const minuteStop = Number(interval.stop.split(':')[1]);
-    currentDayStop.setHours(hourStop);
-    currentDayStop.setMinutes(minuteStop)
+export const formatData = (interval: Interval) => {
+    const currentDayStart = getCurrentDay(interval.start);
+    const currentDayStop = getCurrentDay(interval.stop);
 
     return {start: currentDayStart, stop: currentDayStop}
 }
@@ -47,7 +47,7 @@ export const makeTimes = (interval: IntervalData, elapsedTimeMin: number) => {
 
 export const getIntervals = (arr: Interval[]) => {
     let data: Interval;
-    const currentInterval = arr.sort((a, b) => a.start > b.start ? 1 : -1);
+    const currentInterval = arr.sort((a, b) => getCurrentDay(a.start) > getCurrentDay(b.start) ? 1 : -1);
     const dataInterval: Interval[] = []
     for (let i = 0; i <= arr.length; i++) {
         if (i === 0) {
@@ -66,7 +66,7 @@ export const freeInterval = (arr: string[]) => {
     let interval: Interval
     const data: Interval[] = []
     for (let i = 0; i <= arr.length - 1; i++) {
-        if (i == arr.length - 1) {
+        if (i === arr.length - 1) {
             break
         } else {
             interval = {start: arr[i], stop: arr[i + 1]}

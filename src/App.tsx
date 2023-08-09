@@ -16,6 +16,7 @@ function App() {
             return freeInterval(time)
         })
         const freeIntervals =freeTime.reduce((a, e) => a.concat(e))
+        console.log(freeIntervals)
         setWorkTime(freeIntervals)
     }, [busyTime]);
     return (
