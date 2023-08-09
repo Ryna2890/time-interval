@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {getStaticProps} from "./api/timeIntervalApi";
+import {formatData, getIntervals, makeTimes} from "./utils/timeInterval";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const busyTime = getStaticProps().busy;
+    const [workTime, setWorkTime] = useState<string[]>([])
+
+    useEffect(() => {
+        const intervals = getIntervals(busyTime);
+        const intervalsDate = intervals.map((item) => (formatData(item)));
+        const freeTime = intervalsDate.map((item) => (
+            makeTimes(item, 30)
+        ))
+        setWorkTime(freeTime.reduce((a, e) => a.concat(e)))
+
+    }, [busyTime]);
+    return (
+        <div className="App">
+            {workTime.map((item,index)=>
+            <div key={index}>{item}</div>)}
+        </div>
+    );
 }
 
 export default App;
