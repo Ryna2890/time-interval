@@ -60,3 +60,17 @@ export const getIntervals = (arr: Interval[]) => {
     }
     return dataInterval
 }
+
+export const freeInterval = (arr: string[]) => {
+    let interval: Interval
+    const data: Interval[] = []
+    for (let i = 0; i <= arr.length - 1; i++) {
+        if (i == arr.length - 1) {
+            break
+        } else {
+            interval = {start: arr[i], stop: arr[i + 1]}
+        }
+        data.push(interval)
+    }
+    return data
+}
