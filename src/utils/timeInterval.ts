@@ -1,4 +1,5 @@
 import {Interval, IntervalData} from "../interface/interface";
+import {STARTWORK, STOPWORK} from "../constants/constants";
 
 const currentFormatMinutes = (minutes: number) => {
     return (minutes < 10 ? "0" + minutes : minutes)
@@ -50,9 +51,9 @@ export const getIntervals = (arr: Interval[]) => {
     const dataInterval: Interval[] = []
     for (let i = 0; i <= arr.length; i++) {
         if (i === 0) {
-            data = {start: '9:00', stop: currentInterval[i].start}
+            data = {start: STARTWORK, stop: currentInterval[i].start}
         } else if (i === arr.length) {
-            data = {start: currentInterval[i - 1].stop, stop: '21:00'}
+            data = {start: currentInterval[i - 1].stop, stop: STOPWORK}
         } else {
             data = {start: currentInterval[i - 1].stop, stop: currentInterval[i].start}
         }
