@@ -44,7 +44,6 @@ export const makeTimes = (interval: IntervalData, elapsedTimeMin: number) => {
     return result
 }
 
-
 export const getIntervals = (arr: Interval[]) => {
     let data: Interval;
     const currentInterval = arr.sort((a, b) => getCurrentDay(a.start) > getCurrentDay(b.start) ? 1 : -1);
