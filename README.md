@@ -1,3 +1,8 @@
+Доктор принимает с 9 утра до 9 вечера.
+Часть времени у него занята: приемы, обед, уборка кабинета
+
+Программа формирует список свободных окон по 30 минут.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
