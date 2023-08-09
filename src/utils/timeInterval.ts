@@ -52,7 +52,7 @@ export const getIntervals = (arr: Interval[]) => {
         if (i === 0) {
             data = {start: '9:00', stop: currentInterval[i].start}
         } else if (i === arr.length) {
-            data = {start: currentInterval[i - 1].stop, stop: '22:00'}
+            data = {start: currentInterval[i - 1].stop, stop: '21:00'}
         } else {
             data = {start: currentInterval[i - 1].stop, stop: currentInterval[i].start}
         }
