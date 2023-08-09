@@ -12,16 +12,15 @@ function App() {
         const intervals = getIntervals(busyTime);
         const intervalsDate = intervals.map((item) => (formatData(item)));
         const freeTime = intervalsDate.map((item) => {
-            const time =makeTimes(item, 30);
+            const time = makeTimes(item, 30);
             return freeInterval(time)
         })
-        const freeIntervals =freeTime.reduce((a, e) => a.concat(e))
-        console.log(freeIntervals)
+        const freeIntervals = freeTime.reduce((a, e) => a.concat(e))
         setWorkTime(freeIntervals)
     }, [busyTime]);
     return (
         <div className="App">
-            {workTime.map((item,index)=>
+            {workTime.map((item, index) =>
                 <div key={index}><p>{`${item.start}-${item.stop}`}</p></div>)}
         </div>
     );
